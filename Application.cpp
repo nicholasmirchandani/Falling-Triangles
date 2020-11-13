@@ -146,8 +146,8 @@ int main(void)
 				for (int i = 0; i < numVertices; ++i) {
 					vertices[triangleNum * 6 + i * 2 + 1] += triangleSpeeds[triangleNum][1] * speedMultiplier;
 					vertices[triangleNum * 6 + i * 2] += triangleSpeeds[triangleNum][0] * speedMultiplier;
-					//If All vertices are below the bottom of the screen or off a side, reset it to the top
-					if ((abs(vertices[triangleNum * 6 + 1]) >= 1 && abs(vertices[triangleNum * 6 + 3]) >= -1 && abs(vertices[triangleNum * 6 + 5]) >= 1) || (abs(vertices[triangleNum * 6]) >= 1 && abs(vertices[triangleNum * 6 + 2]) >= -1 && abs(vertices[triangleNum * 6 + 4]) >= 1)) {
+					//If All vertices are below the bottom of the screen, reset it to the top
+					if ((abs(vertices[triangleNum * 6 + 1]) >= 1 && abs(vertices[triangleNum * 6 + 3]) >= -1 && abs(vertices[triangleNum * 6 + 5]) >= 1)) {
 						//NOTE: Triangle isn't actually equilateral unless screen is square since coords are by screen
 						horizontalOffset = (((float)rand() / (RAND_MAX)) - 0.5f)/4;
 						vertices[triangleNum * 6 + 0] = horizontalOffset - (sideLength / 2);
@@ -159,6 +159,10 @@ int main(void)
 						triangleSpeeds[triangleNum][0] = (((float)rand() / (RAND_MAX)) - 0.5f)* -0.01f; //Guaranteeing that it'll be at least half speed of 0.01
 						triangleSpeeds[triangleNum][1] = (((float)rand() / (RAND_MAX)) / 2 + 0.5f)* -0.01f; //Guaranteeing that it'll be at least half speed of 0.01
 					}
+				}
+				//If any of the vertices are off of the screen, flip the horizontal speed
+				if ((abs(vertices[triangleNum * 6]) >= 1 || abs(vertices[triangleNum * 6 + 2]) >= 1 || abs(vertices[triangleNum * 6 + 4]) >= 1)) {
+					triangleSpeeds[triangleNum][0] *= -1;
 				}
 			}
 			glUnmapBuffer(GL_ARRAY_BUFFER);
