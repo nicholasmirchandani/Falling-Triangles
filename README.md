@@ -1,7 +1,7 @@
 # Falling-Triangles
 A simple 2D OpenGL Simulation made using VS 2017
 
-Recently finished up the OpenGL red book and felt like doing a simple little project.  Will update with video showing it in action.  Should work if loaded up with VS 2017, since dependencies are part of the project, but if all else fails the important ciles are Application.cpp and the 2 shaders.  Only external libs are GLEW, GLFW, and OpenGL.
+Recently finished up the OpenGL red book and felt like doing a simple little project.  Will update with video showing it in action.  As usual, just my code is present in the repository.  The important dependencies are GLEW, GLFW, and OpenGL.
 
 General idea is that it's a simulation with an arbitrary number of triangles with different colors, directions, and start positions, going off the screen one way or another.  Additionally, space is a slowdown key, while escape is a pause key.
 
